@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Ephemera"
+config/name="Ephemera_II"
 run/main_scene="res://MainMenu.tscn"
 config/icon="res://icon.png"
 
