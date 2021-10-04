@@ -1,22 +1,43 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Comet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
 [ext_resource path="res://Art/Background.png" type="Texture" id=4]
+[ext_resource path="res://Art/StripedPlanet.png" type="Texture" id=5]
+[ext_resource path="res://Art/BrownPlanet.png" type="Texture" id=6]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="Background" type="Sprite" parent="."]
-scale = Vector2( 32.4688, 18.125 )
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 3072, 0 )
+
+[node name="Background" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource( 4 )
 centered = false
+
+[node name="StripedPlanet" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 2666.07, 308.519 )
+rotation = -0.401273
+texture = ExtResource( 5 )
+
+[node name="StripedPlanet2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1213, 140.34 )
+texture = ExtResource( 6 )
 
 [node name="Comet" parent="." instance=ExtResource( 1 )]
 position = Vector2( 803.904, 271.139 )
 
 [node name="HUD" parent="." instance=ExtResource( 2 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 512, 300 )
+current = true
 
 [connection signal="build" from="." to="Comet" method="_on_Main_build"]
 [connection signal="build_grav_field" from="." to="Comet" method="_on_Main_build_grav_field"]
@@ -24,6 +45,7 @@ position = Vector2( 803.904, 271.139 )
 [connection signal="game_over" from="." to="HUD" method="_on_Main_game_over"]
 [connection signal="update_display" from="." to="HUD" method="_on_Main_update_display"]
 [connection signal="explosions_finished" from="Comet" to="." method="_on_Comet_explosions_finished"]
+[connection signal="out_of_view" from="Comet" to="." method="_on_Comet_out_of_view"]
 [connection signal="update_display" from="Comet" to="." method="_on_Comet_update_display"]
 [connection signal="won" from="Comet" to="." method="_on_Comet_won"]
 [connection signal="build" from="HUD" to="." method="_on_HUD_build"]

@@ -49,3 +49,4 @@ func _on_Sprite_animation_finished()->void:
 	if _is_exploding:
 		hide()
 		emit_signal("station_exploded")
+		_is_exploding = false

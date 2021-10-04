@@ -37,7 +37,7 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( -300, 0 )
 frames = SubResource( 1 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Tail" type="Area2D" parent="."]
@@ -186,8 +186,11 @@ type = "mine"
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -300, 0 )
 frames = SubResource( 3 )
-frame = 1
+frame = 2
 playing = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -800, 0 )
 
 [connection signal="mouse_entered" from="Tail" to="." method="_on_Tail_mouse_entered"]
 [connection signal="mouse_exited" from="Tail" to="." method="_on_Tail_mouse_exited"]
@@ -230,3 +233,4 @@ playing = true
 [connection signal="new_material" from="Head/Mine3" to="." method="_on_Station_new_material"]
 [connection signal="station_exploded" from="Head/Mine3" to="." method="_on_station_exploded"]
 [connection signal="timeout" from="ExplodeTimer" to="." method="_on_ExplodeTimer_timeout"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

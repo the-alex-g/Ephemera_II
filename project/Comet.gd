@@ -4,6 +4,7 @@ extends Node2D
 signal update_display(vapor, ore)
 signal won
 signal explosions_finished
+signal out_of_view
 
 # enums
 
@@ -142,3 +143,7 @@ func _on_Main_build_grav_field()->void:
 		emit_signal("won")
 		_is_game_running = false
 		_explode_timer.stop()
+
+
+func _on_VisibilityNotifier2D_screen_exited()->void:
+	emit_signal("out_of_view")
